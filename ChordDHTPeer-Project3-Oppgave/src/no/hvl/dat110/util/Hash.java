@@ -11,12 +11,25 @@ import java.math.BigInteger;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 public class Hash { 
 	
 	private static BigInteger hashint; 
 	
-	public static BigInteger hashOf(String entity) {		
+	public static BigInteger hashOf(String entity) {
+		
+		byte[] b = null;
+		
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			b = md.digest(entity.getBytes("UTF-8"));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		String hex = toHex(b);
+		hashint = new BigInteger(hex,16);
 		
 		// Task: Hash a given string using MD5 and return the result as a BigInteger.
 		
@@ -35,6 +48,10 @@ public class Hash {
 	
 	public static BigInteger addressSize() {
 		
+		BigInteger as = new BigInteger("2").pow(bitSize()*8);
+		
+		return as;
+		
 		// Task: compute the address size of MD5
 		
 		// get the digest length
@@ -45,16 +62,20 @@ public class Hash {
 		
 		// return the address size
 		
-		return null;
+		
 	}
 	
 	public static int bitSize() {
 		
-		int digestlen = 0;
-		
+		int digestlen=0;
+		try {
+			digestlen = MessageDigest.getInstance("MD5").getDigestLength();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		// find the digest length
 		
-		return digestlen*8;
+		return digestlen;
 	}
 	
 	public static String toHex(byte[] digest) {
