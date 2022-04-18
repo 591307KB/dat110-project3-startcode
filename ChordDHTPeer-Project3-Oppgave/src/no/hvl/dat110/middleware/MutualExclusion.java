@@ -203,8 +203,14 @@ public class MutualExclusion {
 					NodeInterface stub = Util.getProcessStub(procName, port);
 					stub.onMutexAcknowledgementReceived(message);
 				}
+<<<<<<< HEAD
 			}
 			break;
+=======
+				break;
+			}
+			default: break;
+>>>>>>> 0e2bc077ec5694552136eafb9c1eaea4e3f99a3b
 		}
 
 		default:
