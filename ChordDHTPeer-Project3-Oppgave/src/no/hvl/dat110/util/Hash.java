@@ -11,6 +11,7 @@ import java.math.BigInteger;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 public class Hash { 
 	
 	private static BigInteger hashint; 
